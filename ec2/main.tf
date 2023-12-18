@@ -20,7 +20,7 @@ resource "aws_route35_record" "record" {
     name        = "${var.component}-dev.devsig90.online"
     type        = "A"
     ttl         = 30
-    record      = [aws_instance.ec2.private_ip]
+    records     = [aws_instance.ec2.private_ip]
 }
 
 
