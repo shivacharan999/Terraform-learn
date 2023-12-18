@@ -1,25 +1,28 @@
-resource "aws_security_group" "allow_tls" {
-  name        = "allow_tls"
-  description = "Allow TLS inbound traffic"
+module "ec2" {
 
-  ingress {
-    description      = "TLS from VPC"
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0"]
+    for_each  = var.instances
+    source    = "./ec2"
+    component  = each.value["name]
+    instance_type  = each.value["type]
 
-  }
 
-  egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
-  }
+}
 
-  tags = {
-    Name = "allow_tls"
-  }
+module "sg" {
+    source = "./sg"
+}
+
+
+variable "instances" {
+
+    default = {
+        catalogue = {
+            name = "catalogue"
+            type = "t3.micro"
+        }
+        user = {
+            name = "user"
+            type = "t3.micro"
+        }
+    }
 }
