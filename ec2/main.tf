@@ -14,7 +14,7 @@ resource "aws_instance" "ec2" {
     }
 }
 
-resource "aws_route35_record" "record" {
+resource "aws_route53_record" "record" {  
 
     zone_id     = "Z050249122YGPFCQEASIN"
     name        = "${var.component}-dev.devsig90.online"
