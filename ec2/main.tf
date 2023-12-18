@@ -1,6 +1,6 @@
 data "aws_ami" "ami" {
     most_recent  = true
-    name_regex   = "Centos-8-Devops-Practice"
+    name_regex   = "Centos-8-DevOps-Practice"
     owners       =  ["290972336566"]
 }
 
@@ -12,15 +12,6 @@ resource "aws_instance" "ec2" {
     tags = {
         Name = var.component
     }
-}
-
-resource "aws_route53_record" "record" {  
-
-    zone_id     = "Z050249122YGPFCQEASIN"
-    name        = "${var.component}-dev.devsig90.online"
-    type        = "A"
-    ttl         = 30
-    records     = [aws_instance.ec2.private_ip]
 }
 
 
