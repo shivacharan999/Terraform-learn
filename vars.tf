@@ -1,5 +1,4 @@
 variable "instances" {
-
     default = {
         catalogue = {
             name = "catalogue"
